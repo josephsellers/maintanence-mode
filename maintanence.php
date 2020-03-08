@@ -1,4 +1,7 @@
-<!doctype html>
+// Activate WordPress Maintenance Mode
+function wp_maintenance_mode() {
+    if (!current_user_can('edit_themes') || !is_user_logged_in()) {
+        wp_die('<!doctype html>
 <title>Site Maintenance</title>
 <style>
   body { text-align: center; padding: 150px; }
@@ -16,4 +19,7 @@
         <p>We will get the site back up as soon as we can.</p>
         <p>Thanks for your patience!</p>
     </div>
-</article>
+</article>');
+    }
+}
+add_action('get_header', 'wp_maintenance_mode');
